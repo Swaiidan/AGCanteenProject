@@ -1,0 +1,560 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_AGCanteenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tbl_Breakfast">
+          <Key>
+            <PropertyRef Name="Fld_BrealfastID" />
+          </Key>
+          <Property Name="Fld_BreakfastName" Type="nchar" MaxLength="30" />
+          <Property Name="Fld_BreakfastPrice" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Fld_BrealfastID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Fld_CategoryID" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Tbl_BreakfastCategory">
+          <Key>
+            <PropertyRef Name="Fld_CategoryID" />
+          </Key>
+          <Property Name="Fld_CategoryID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Fld_CategoryName" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Tbl_Cake">
+          <Key>
+            <PropertyRef Name="Fld_CakeID" />
+          </Key>
+          <Property Name="Fld_CakeName" Type="nchar" MaxLength="30" />
+          <Property Name="Fld_CakePrice" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Fld_Description" Type="nchar" MaxLength="30" />
+          <Property Name="Fld_CakeID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Customer">
+          <Key>
+            <PropertyRef Name="Fld_CustomerID" />
+          </Key>
+          <Property Name="Fld_CustomerName" Type="nchar" MaxLength="30" />
+          <Property Name="Fld_CustomerID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Fld_Phonenumber" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Fld_CanteenStaffID" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Tbl_Fruit">
+          <Key>
+            <PropertyRef Name="Fld_FruitID" />
+          </Key>
+          <Property Name="Fld_FruitName" Type="nchar" MaxLength="30" />
+          <Property Name="Fld_FruitPrice" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Fld_FruitID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Lunch">
+          <Key>
+            <PropertyRef Name="Fld_LunchID" />
+          </Key>
+          <Property Name="Fld_LunchName" Type="nchar" MaxLength="30" />
+          <Property Name="Fld_LunchPrice" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Fld_Description" Type="nchar" MaxLength="30" />
+          <Property Name="Fld_LunchID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Order">
+          <Key>
+            <PropertyRef Name="Fld_OrdreID" />
+          </Key>
+          <Property Name="Fld_CustomerID" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Fld_OrdreID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Fld_Price" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Fld_WeekNumber" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Fld_Day" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Tbl_OrderLine">
+          <Key>
+            <PropertyRef Name="Fld_OrderLineID" />
+          </Key>
+          <Property Name="Fld_OrderID" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Fld_FruitID" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Fld_BreakfastID" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Fld_LunchID" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Fld_CakeID" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Fld_OrderLineID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Quantity" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <Association Name="FK_Tbl_Breakfast_Tbl_BreakfastCategory">
+          <End Role="Tbl_BreakfastCategory" Type="Self.Tbl_BreakfastCategory" Multiplicity="0..1" />
+          <End Role="Tbl_Breakfast" Type="Self.Tbl_Breakfast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_BreakfastCategory">
+              <PropertyRef Name="Fld_CategoryID" />
+            </Principal>
+            <Dependent Role="Tbl_Breakfast">
+              <PropertyRef Name="Fld_CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Order_tbl_Customer1">
+          <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="0..1" />
+          <End Role="Tbl_Order" Type="Self.Tbl_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Customer">
+              <PropertyRef Name="Fld_CustomerID" />
+            </Principal>
+            <Dependent Role="Tbl_Order">
+              <PropertyRef Name="Fld_CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_OrderLine_Tbl_Breakfast">
+          <End Role="Tbl_Breakfast" Type="Self.Tbl_Breakfast" Multiplicity="0..1" />
+          <End Role="Tbl_OrderLine" Type="Self.Tbl_OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Breakfast">
+              <PropertyRef Name="Fld_BrealfastID" />
+            </Principal>
+            <Dependent Role="Tbl_OrderLine">
+              <PropertyRef Name="Fld_BreakfastID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_OrderLine_Tbl_Cake">
+          <End Role="Tbl_Cake" Type="Self.Tbl_Cake" Multiplicity="0..1" />
+          <End Role="Tbl_OrderLine" Type="Self.Tbl_OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Cake">
+              <PropertyRef Name="Fld_CakeID" />
+            </Principal>
+            <Dependent Role="Tbl_OrderLine">
+              <PropertyRef Name="Fld_CakeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_OrderLine_Tbl_Fruit">
+          <End Role="Tbl_Fruit" Type="Self.Tbl_Fruit" Multiplicity="0..1" />
+          <End Role="Tbl_OrderLine" Type="Self.Tbl_OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Fruit">
+              <PropertyRef Name="Fld_FruitID" />
+            </Principal>
+            <Dependent Role="Tbl_OrderLine">
+              <PropertyRef Name="Fld_FruitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_OrderLine_Tbl_Lunch">
+          <End Role="Tbl_Lunch" Type="Self.Tbl_Lunch" Multiplicity="0..1" />
+          <End Role="Tbl_OrderLine" Type="Self.Tbl_OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Lunch">
+              <PropertyRef Name="Fld_LunchID" />
+            </Principal>
+            <Dependent Role="Tbl_OrderLine">
+              <PropertyRef Name="Fld_LunchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_OrderLine_Tbl_Order">
+          <End Role="Tbl_Order" Type="Self.Tbl_Order" Multiplicity="0..1" />
+          <End Role="Tbl_OrderLine" Type="Self.Tbl_OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Order">
+              <PropertyRef Name="Fld_OrdreID" />
+            </Principal>
+            <Dependent Role="Tbl_OrderLine">
+              <PropertyRef Name="Fld_OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_AGCanteenModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Breakfast" EntityType="Self.Tbl_Breakfast" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_BreakfastCategory" EntityType="Self.Tbl_BreakfastCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Cake" EntityType="Self.Tbl_Cake" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Customer" EntityType="Self.tbl_Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Fruit" EntityType="Self.Tbl_Fruit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Lunch" EntityType="Self.Tbl_Lunch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Order" EntityType="Self.Tbl_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_OrderLine" EntityType="Self.Tbl_OrderLine" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Tbl_Breakfast_Tbl_BreakfastCategory" Association="Self.FK_Tbl_Breakfast_Tbl_BreakfastCategory">
+            <End Role="Tbl_BreakfastCategory" EntitySet="Tbl_BreakfastCategory" />
+            <End Role="Tbl_Breakfast" EntitySet="Tbl_Breakfast" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Order_tbl_Customer1" Association="Self.FK_Tbl_Order_tbl_Customer1">
+            <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+            <End Role="Tbl_Order" EntitySet="Tbl_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_OrderLine_Tbl_Breakfast" Association="Self.FK_Tbl_OrderLine_Tbl_Breakfast">
+            <End Role="Tbl_Breakfast" EntitySet="Tbl_Breakfast" />
+            <End Role="Tbl_OrderLine" EntitySet="Tbl_OrderLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_OrderLine_Tbl_Cake" Association="Self.FK_Tbl_OrderLine_Tbl_Cake">
+            <End Role="Tbl_Cake" EntitySet="Tbl_Cake" />
+            <End Role="Tbl_OrderLine" EntitySet="Tbl_OrderLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_OrderLine_Tbl_Fruit" Association="Self.FK_Tbl_OrderLine_Tbl_Fruit">
+            <End Role="Tbl_Fruit" EntitySet="Tbl_Fruit" />
+            <End Role="Tbl_OrderLine" EntitySet="Tbl_OrderLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_OrderLine_Tbl_Lunch" Association="Self.FK_Tbl_OrderLine_Tbl_Lunch">
+            <End Role="Tbl_Lunch" EntitySet="Tbl_Lunch" />
+            <End Role="Tbl_OrderLine" EntitySet="Tbl_OrderLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_OrderLine_Tbl_Order" Association="Self.FK_Tbl_OrderLine_Tbl_Order">
+            <End Role="Tbl_Order" EntitySet="Tbl_Order" />
+            <End Role="Tbl_OrderLine" EntitySet="Tbl_OrderLine" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_AGCanteenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Breakfast">
+          <Key>
+            <PropertyRef Name="Fld_BrealfastID" />
+          </Key>
+          <Property Name="Fld_BreakfastName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Fld_BreakfastPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fld_BrealfastID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Fld_CategoryID" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Tbl_BreakfastCategory" Relationship="Self.FK_Tbl_Breakfast_Tbl_BreakfastCategory" FromRole="Tbl_Breakfast" ToRole="Tbl_BreakfastCategory" />
+          <NavigationProperty Name="Tbl_OrderLine" Relationship="Self.FK_Tbl_OrderLine_Tbl_Breakfast" FromRole="Tbl_Breakfast" ToRole="Tbl_OrderLine" />
+        </EntityType>
+        <EntityType Name="Tbl_BreakfastCategory">
+          <Key>
+            <PropertyRef Name="Fld_CategoryID" />
+          </Key>
+          <Property Name="Fld_CategoryID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Fld_CategoryName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Tbl_Breakfast" Relationship="Self.FK_Tbl_Breakfast_Tbl_BreakfastCategory" FromRole="Tbl_BreakfastCategory" ToRole="Tbl_Breakfast" />
+        </EntityType>
+        <EntityType Name="Tbl_Cake">
+          <Key>
+            <PropertyRef Name="Fld_CakeID" />
+          </Key>
+          <Property Name="Fld_CakeName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Fld_CakePrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fld_Description" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Fld_CakeID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Tbl_OrderLine" Relationship="Self.FK_Tbl_OrderLine_Tbl_Cake" FromRole="Tbl_Cake" ToRole="Tbl_OrderLine" />
+        </EntityType>
+        <EntityType Name="tbl_Customer">
+          <Key>
+            <PropertyRef Name="Fld_CustomerID" />
+          </Key>
+          <Property Name="Fld_CustomerName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Fld_CustomerID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Fld_Phonenumber" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fld_CanteenStaffID" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Tbl_Order" Relationship="Self.FK_Tbl_Order_tbl_Customer1" FromRole="tbl_Customer" ToRole="Tbl_Order" />
+        </EntityType>
+        <EntityType Name="Tbl_Fruit">
+          <Key>
+            <PropertyRef Name="Fld_FruitID" />
+          </Key>
+          <Property Name="Fld_FruitName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Fld_FruitPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fld_FruitID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Tbl_OrderLine" Relationship="Self.FK_Tbl_OrderLine_Tbl_Fruit" FromRole="Tbl_Fruit" ToRole="Tbl_OrderLine" />
+        </EntityType>
+        <EntityType Name="Tbl_Lunch">
+          <Key>
+            <PropertyRef Name="Fld_LunchID" />
+          </Key>
+          <Property Name="Fld_LunchName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Fld_LunchPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fld_Description" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Fld_LunchID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Tbl_OrderLine" Relationship="Self.FK_Tbl_OrderLine_Tbl_Lunch" FromRole="Tbl_Lunch" ToRole="Tbl_OrderLine" />
+        </EntityType>
+        <EntityType Name="Tbl_Order">
+          <Key>
+            <PropertyRef Name="Fld_OrdreID" />
+          </Key>
+          <Property Name="Fld_CustomerID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fld_OrdreID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Fld_Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fld_WeekNumber" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fld_Day" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="tbl_Customer" Relationship="Self.FK_Tbl_Order_tbl_Customer1" FromRole="Tbl_Order" ToRole="tbl_Customer" />
+          <NavigationProperty Name="Tbl_OrderLine" Relationship="Self.FK_Tbl_OrderLine_Tbl_Order" FromRole="Tbl_Order" ToRole="Tbl_OrderLine" />
+        </EntityType>
+        <EntityType Name="Tbl_OrderLine">
+          <Key>
+            <PropertyRef Name="Fld_OrderLineID" />
+          </Key>
+          <Property Name="Fld_OrderID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fld_FruitID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fld_BreakfastID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fld_LunchID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fld_CakeID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fld_OrderLineID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Tbl_Breakfast" Relationship="Self.FK_Tbl_OrderLine_Tbl_Breakfast" FromRole="Tbl_OrderLine" ToRole="Tbl_Breakfast" />
+          <NavigationProperty Name="Tbl_Cake" Relationship="Self.FK_Tbl_OrderLine_Tbl_Cake" FromRole="Tbl_OrderLine" ToRole="Tbl_Cake" />
+          <NavigationProperty Name="Tbl_Fruit" Relationship="Self.FK_Tbl_OrderLine_Tbl_Fruit" FromRole="Tbl_OrderLine" ToRole="Tbl_Fruit" />
+          <NavigationProperty Name="Tbl_Lunch" Relationship="Self.FK_Tbl_OrderLine_Tbl_Lunch" FromRole="Tbl_OrderLine" ToRole="Tbl_Lunch" />
+          <NavigationProperty Name="Tbl_Order" Relationship="Self.FK_Tbl_OrderLine_Tbl_Order" FromRole="Tbl_OrderLine" ToRole="Tbl_Order" />
+        </EntityType>
+        <Association Name="FK_Tbl_Breakfast_Tbl_BreakfastCategory">
+          <End Role="Tbl_BreakfastCategory" Type="Self.Tbl_BreakfastCategory" Multiplicity="0..1" />
+          <End Role="Tbl_Breakfast" Type="Self.Tbl_Breakfast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_BreakfastCategory">
+              <PropertyRef Name="Fld_CategoryID" />
+            </Principal>
+            <Dependent Role="Tbl_Breakfast">
+              <PropertyRef Name="Fld_CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_OrderLine_Tbl_Breakfast">
+          <End Role="Tbl_Breakfast" Type="Self.Tbl_Breakfast" Multiplicity="0..1" />
+          <End Role="Tbl_OrderLine" Type="Self.Tbl_OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Breakfast">
+              <PropertyRef Name="Fld_BrealfastID" />
+            </Principal>
+            <Dependent Role="Tbl_OrderLine">
+              <PropertyRef Name="Fld_BreakfastID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_OrderLine_Tbl_Cake">
+          <End Role="Tbl_Cake" Type="Self.Tbl_Cake" Multiplicity="0..1" />
+          <End Role="Tbl_OrderLine" Type="Self.Tbl_OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Cake">
+              <PropertyRef Name="Fld_CakeID" />
+            </Principal>
+            <Dependent Role="Tbl_OrderLine">
+              <PropertyRef Name="Fld_CakeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Order_tbl_Customer1">
+          <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="0..1" />
+          <End Role="Tbl_Order" Type="Self.Tbl_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Customer">
+              <PropertyRef Name="Fld_CustomerID" />
+            </Principal>
+            <Dependent Role="Tbl_Order">
+              <PropertyRef Name="Fld_CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_OrderLine_Tbl_Fruit">
+          <End Role="Tbl_Fruit" Type="Self.Tbl_Fruit" Multiplicity="0..1" />
+          <End Role="Tbl_OrderLine" Type="Self.Tbl_OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Fruit">
+              <PropertyRef Name="Fld_FruitID" />
+            </Principal>
+            <Dependent Role="Tbl_OrderLine">
+              <PropertyRef Name="Fld_FruitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_OrderLine_Tbl_Lunch">
+          <End Role="Tbl_Lunch" Type="Self.Tbl_Lunch" Multiplicity="0..1" />
+          <End Role="Tbl_OrderLine" Type="Self.Tbl_OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Lunch">
+              <PropertyRef Name="Fld_LunchID" />
+            </Principal>
+            <Dependent Role="Tbl_OrderLine">
+              <PropertyRef Name="Fld_LunchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_OrderLine_Tbl_Order">
+          <End Role="Tbl_Order" Type="Self.Tbl_Order" Multiplicity="0..1" />
+          <End Role="Tbl_OrderLine" Type="Self.Tbl_OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Order">
+              <PropertyRef Name="Fld_OrdreID" />
+            </Principal>
+            <Dependent Role="Tbl_OrderLine">
+              <PropertyRef Name="Fld_OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_AGCanteenEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tbl_Breakfast" EntityType="Self.Tbl_Breakfast" />
+          <EntitySet Name="Tbl_BreakfastCategory" EntityType="Self.Tbl_BreakfastCategory" />
+          <EntitySet Name="Tbl_Cake" EntityType="Self.Tbl_Cake" />
+          <EntitySet Name="tbl_Customer" EntityType="Self.tbl_Customer" />
+          <EntitySet Name="Tbl_Fruit" EntityType="Self.Tbl_Fruit" />
+          <EntitySet Name="Tbl_Lunch" EntityType="Self.Tbl_Lunch" />
+          <EntitySet Name="Tbl_Order" EntityType="Self.Tbl_Order" />
+          <EntitySet Name="Tbl_OrderLine" EntityType="Self.Tbl_OrderLine" />
+          <AssociationSet Name="FK_Tbl_Breakfast_Tbl_BreakfastCategory" Association="Self.FK_Tbl_Breakfast_Tbl_BreakfastCategory">
+            <End Role="Tbl_BreakfastCategory" EntitySet="Tbl_BreakfastCategory" />
+            <End Role="Tbl_Breakfast" EntitySet="Tbl_Breakfast" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_OrderLine_Tbl_Breakfast" Association="Self.FK_Tbl_OrderLine_Tbl_Breakfast">
+            <End Role="Tbl_Breakfast" EntitySet="Tbl_Breakfast" />
+            <End Role="Tbl_OrderLine" EntitySet="Tbl_OrderLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_OrderLine_Tbl_Cake" Association="Self.FK_Tbl_OrderLine_Tbl_Cake">
+            <End Role="Tbl_Cake" EntitySet="Tbl_Cake" />
+            <End Role="Tbl_OrderLine" EntitySet="Tbl_OrderLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Order_tbl_Customer1" Association="Self.FK_Tbl_Order_tbl_Customer1">
+            <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+            <End Role="Tbl_Order" EntitySet="Tbl_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_OrderLine_Tbl_Fruit" Association="Self.FK_Tbl_OrderLine_Tbl_Fruit">
+            <End Role="Tbl_Fruit" EntitySet="Tbl_Fruit" />
+            <End Role="Tbl_OrderLine" EntitySet="Tbl_OrderLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_OrderLine_Tbl_Lunch" Association="Self.FK_Tbl_OrderLine_Tbl_Lunch">
+            <End Role="Tbl_Lunch" EntitySet="Tbl_Lunch" />
+            <End Role="Tbl_OrderLine" EntitySet="Tbl_OrderLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_OrderLine_Tbl_Order" Association="Self.FK_Tbl_OrderLine_Tbl_Order">
+            <End Role="Tbl_Order" EntitySet="Tbl_Order" />
+            <End Role="Tbl_OrderLine" EntitySet="Tbl_OrderLine" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_AGCanteenModelStoreContainer" CdmEntityContainer="DB_AGCanteenEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DB_AGCanteenModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Breakfast">
+            <EntityTypeMapping TypeName="DB_AGCanteenModel.Tbl_Breakfast">
+              <MappingFragment StoreEntitySet="Tbl_Breakfast">
+                <ScalarProperty Name="Fld_BreakfastName" ColumnName="Fld_BreakfastName" />
+                <ScalarProperty Name="Fld_BreakfastPrice" ColumnName="Fld_BreakfastPrice" />
+                <ScalarProperty Name="Fld_BrealfastID" ColumnName="Fld_BrealfastID" />
+                <ScalarProperty Name="Fld_CategoryID" ColumnName="Fld_CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_BreakfastCategory">
+            <EntityTypeMapping TypeName="DB_AGCanteenModel.Tbl_BreakfastCategory">
+              <MappingFragment StoreEntitySet="Tbl_BreakfastCategory">
+                <ScalarProperty Name="Fld_CategoryID" ColumnName="Fld_CategoryID" />
+                <ScalarProperty Name="Fld_CategoryName" ColumnName="Fld_CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Cake">
+            <EntityTypeMapping TypeName="DB_AGCanteenModel.Tbl_Cake">
+              <MappingFragment StoreEntitySet="Tbl_Cake">
+                <ScalarProperty Name="Fld_CakeName" ColumnName="Fld_CakeName" />
+                <ScalarProperty Name="Fld_CakePrice" ColumnName="Fld_CakePrice" />
+                <ScalarProperty Name="Fld_Description" ColumnName="Fld_Description" />
+                <ScalarProperty Name="Fld_CakeID" ColumnName="Fld_CakeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Customer">
+            <EntityTypeMapping TypeName="DB_AGCanteenModel.tbl_Customer">
+              <MappingFragment StoreEntitySet="tbl_Customer">
+                <ScalarProperty Name="Fld_CustomerName" ColumnName="Fld_CustomerName" />
+                <ScalarProperty Name="Fld_CustomerID" ColumnName="Fld_CustomerID" />
+                <ScalarProperty Name="Fld_Phonenumber" ColumnName="Fld_Phonenumber" />
+                <ScalarProperty Name="Fld_CanteenStaffID" ColumnName="Fld_CanteenStaffID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Fruit">
+            <EntityTypeMapping TypeName="DB_AGCanteenModel.Tbl_Fruit">
+              <MappingFragment StoreEntitySet="Tbl_Fruit">
+                <ScalarProperty Name="Fld_FruitName" ColumnName="Fld_FruitName" />
+                <ScalarProperty Name="Fld_FruitPrice" ColumnName="Fld_FruitPrice" />
+                <ScalarProperty Name="Fld_FruitID" ColumnName="Fld_FruitID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Lunch">
+            <EntityTypeMapping TypeName="DB_AGCanteenModel.Tbl_Lunch">
+              <MappingFragment StoreEntitySet="Tbl_Lunch">
+                <ScalarProperty Name="Fld_LunchName" ColumnName="Fld_LunchName" />
+                <ScalarProperty Name="Fld_LunchPrice" ColumnName="Fld_LunchPrice" />
+                <ScalarProperty Name="Fld_Description" ColumnName="Fld_Description" />
+                <ScalarProperty Name="Fld_LunchID" ColumnName="Fld_LunchID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Order">
+            <EntityTypeMapping TypeName="DB_AGCanteenModel.Tbl_Order">
+              <MappingFragment StoreEntitySet="Tbl_Order">
+                <ScalarProperty Name="Fld_CustomerID" ColumnName="Fld_CustomerID" />
+                <ScalarProperty Name="Fld_OrdreID" ColumnName="Fld_OrdreID" />
+                <ScalarProperty Name="Fld_Price" ColumnName="Fld_Price" />
+                <ScalarProperty Name="Fld_WeekNumber" ColumnName="Fld_WeekNumber" />
+                <ScalarProperty Name="Fld_Day" ColumnName="Fld_Day" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_OrderLine">
+            <EntityTypeMapping TypeName="DB_AGCanteenModel.Tbl_OrderLine">
+              <MappingFragment StoreEntitySet="Tbl_OrderLine">
+                <ScalarProperty Name="Fld_OrderID" ColumnName="Fld_OrderID" />
+                <ScalarProperty Name="Fld_FruitID" ColumnName="Fld_FruitID" />
+                <ScalarProperty Name="Fld_BreakfastID" ColumnName="Fld_BreakfastID" />
+                <ScalarProperty Name="Fld_LunchID" ColumnName="Fld_LunchID" />
+                <ScalarProperty Name="Fld_CakeID" ColumnName="Fld_CakeID" />
+                <ScalarProperty Name="Fld_OrderLineID" ColumnName="Fld_OrderLineID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

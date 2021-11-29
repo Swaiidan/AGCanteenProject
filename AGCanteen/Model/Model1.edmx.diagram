@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="43aa9a98798f42ad9b8696e287af86fc" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_AGCanteenModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_AGCanteenModel.Tbl_Breakfast" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_AGCanteenModel.Tbl_BreakfastCategory" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_AGCanteenModel.Tbl_Cake" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_AGCanteenModel.tbl_Customer" Width="1.5" PointX="0.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_AGCanteenModel.Tbl_Fruit" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_AGCanteenModel.Tbl_Lunch" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_AGCanteenModel.Tbl_Order" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_AGCanteenModel.Tbl_OrderLine" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="DB_AGCanteenModel.FK_Tbl_Breakfast_Tbl_BreakfastCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_AGCanteenModel.FK_Tbl_OrderLine_Tbl_Breakfast" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_AGCanteenModel.FK_Tbl_OrderLine_Tbl_Cake" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_AGCanteenModel.FK_Tbl_Order_tbl_Customer1" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_AGCanteenModel.FK_Tbl_OrderLine_Tbl_Fruit" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_AGCanteenModel.FK_Tbl_OrderLine_Tbl_Lunch" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_AGCanteenModel.FK_Tbl_OrderLine_Tbl_Order" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
