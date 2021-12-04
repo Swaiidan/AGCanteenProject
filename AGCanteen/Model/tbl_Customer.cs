@@ -23,7 +23,6 @@ namespace AGCanteen.Model
         public string Fld_CustomerName { get; set; }
         public decimal Fld_CustomerID { get; set; }
         public Nullable<decimal> Fld_Phonenumber { get; set; }
-        public Nullable<decimal> Fld_CanteenStaffID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Order> Tbl_Order { get; set; }

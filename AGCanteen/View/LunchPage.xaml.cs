@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AGCanteen
+namespace AGCanteen.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LunchPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LunchPage : UserControl
     {
-        public MainWindow()
+        public LunchPage()
         {
             InitializeComponent();
         }

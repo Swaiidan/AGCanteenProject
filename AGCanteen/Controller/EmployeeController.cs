@@ -3,54 +3,75 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using AGCanteen.Model;
 
 namespace AGCanteen.Controller
 {
-    class EmployeeeController
+    public class EmployeeController
     {
-        // Assignment in class - 5 different assignments one group pr. assignment- send the solution code to tha@easv.dk
+        
+          
+        
         public class CRUD  // abstract + subclassing better!
         {
-            // # 1 READ all names emails telephones (+ membership type)
-
-            public void ReadAll()
+            //READ all breakfastitems
+             
+             
+            List<BreakfastItem> BreakfastItemList = new List<BreakfastItem>();
+            public List<BreakfastItem> AllBreakfastItems()
             {
-                // DEMO CODE - DELETE THIS!!
-                using (var db = new Models.MemberDBEntities1())
+                
+
+                using (var db = new Model.DB_AGCanteenEntities())
                 {
-                    CRUD c = new CRUD();
 
-
-                    // Display all members from the database
-                    var query = from b in db.Member
-                                orderby b.member_name
+                    var query = from b in db.Tbl_Breakfast
+                                orderby b.Fld_BreakfastName
                                 select b;
 
-                    Console.WriteLine("all names in the database:");
-                    foreach (var item in query)
+                    foreach(var item in db.Tbl_Breakfast)
                     {
+                        BreakfastItem bfItem = new BreakfastItem();
+                        bfItem.Name = item.Fld_BreakfastName;
+                        bfItem.Price = (decimal)item.Fld_BreakfastPrice;
 
-                        Console.WriteLine("Name: " + item.member_name + " phonenumber: " + item.phone + " Email: " + item.email + " member type: " + item.membership_type);
+                        BreakfastItemList.Add(bfItem);
                     }
 
                 }
+
+                return BreakfastItemList;
             }
 
-            // # 2 READ find a member by name
 
-            public void UpdateEmail(int memberID, String email)
+
+
+            // Adding Breakfastitem
+
+            public void AddBreakfastItem()
             {
-                using (var db = new Models.MemberDBEntities1())
+                using (var db = new Model.DB_AGCanteenEntities())
                 {
-                    //a find member in context LINQ
+                    
+                 try
+                {
+                    var breakfastItem = new BreakfastItem()
+                    {
+                        Name = "hse",
+                        Price = 220,
+                    };
+                        Tbl_Breakfast bf = new Tbl_Breakfast();
+                        bf.Fld_BreakfastName = breakfastItem.Name;
+                        bf.Fld_BreakfastPrice = breakfastItem.Price;
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.InnerException.Message);
+                }
 
-                    List<Member> myMembers = (from b in db.Member orderby b.member_name select b).ToList;
-                    Member member = myMembers.Find(m => m.email.Equals(""));
 
-                    //Change the email in the object
-
-
-                    //SAVE THE CONTEXT
                 }
             }
 
@@ -61,31 +82,7 @@ namespace AGCanteen.Controller
             // # 5 INSERT a complete new member 
 
 
-            static void Main(string[] args)
-            {
-                /*
-                // DEMO CODE - DELETE THIS!!
-                using (var db = new Models.MemberDBEntities1())
-                {
-
-                    // Display all members from the database
-                    var query = from b in db.Member
-                                orderby b.member_name
-                                select b;
-
-                    Console.WriteLine("all names in the database:");
-                    foreach (var item in query)
-                    {
-
-                        Console.WriteLine("Name: " + item.member_name + " phonenumber: " + item.phone + " Email: " + item.email + " member type: " + item.membership_type);
-                    }
-
-               */
-
-                Console.Read();
-
-
-            }
+            
 
         }
     }
