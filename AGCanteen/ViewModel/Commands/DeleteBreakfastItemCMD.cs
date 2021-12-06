@@ -7,14 +7,13 @@ using System.Windows.Input;
 
 namespace AGCanteen.ViewModel.Commands
 {
-    class AddBreakfastItem : ICommand
+    class DeleteBreakfastItemCMD : ICommand
     {
-
         public event EventHandler CanExecuteChanged;
 
         private Action<Object> MyAddDelegate { get; set; }
 
-        public AddBreakfastItem(Action<Object> MyAddDelegate)
+        public DeleteBreakfastItemCMD(Action<Object> MyAddDelegate)
         {
             this.MyAddDelegate = MyAddDelegate;
 
@@ -27,11 +26,8 @@ namespace AGCanteen.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            
+
             this.MyAddDelegate?.Invoke(parameter);
         }
     }
-
-
-
 }

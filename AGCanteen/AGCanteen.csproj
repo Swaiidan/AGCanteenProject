@@ -86,7 +86,8 @@
     </Compile>
     <Compile Include="Model\BreakfastItem.cs" />
     <Compile Include="ViewModel\BreakfastPageViewModel.cs" />
-    <Compile Include="ViewModel\Commands\AddBreakfastItem.cs" />
+    <Compile Include="ViewModel\Commands\AddBreakfastItemCMD.cs" />
+    <Compile Include="ViewModel\Commands\DeleteBreakfastItemCMD.cs" />
     <Compile Include="ViewModel\LunchPageViewModel.cs" />
     <Compile Include="View\BreakfastPage.xaml.cs">
       <DependentUpon>BreakfastPage.xaml</DependentUpon>

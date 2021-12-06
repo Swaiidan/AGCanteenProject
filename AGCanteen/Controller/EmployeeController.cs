@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using AGCanteen.Model;
+using AGCanteen.ViewModel;
 
 namespace AGCanteen.Controller
 {
@@ -58,18 +59,46 @@ namespace AGCanteen.Controller
                 {
                     var breakfastItem = new BreakfastItem()
                     {
-                        Name = "hse",
-                        Price = 220,
+                        Name = "test3",
+                        Price = 100,
                     };
                         Tbl_Breakfast bf = new Tbl_Breakfast();
                         bf.Fld_BreakfastName = breakfastItem.Name;
                         bf.Fld_BreakfastPrice = breakfastItem.Price;
+                        db.Tbl_Breakfast.Add(bf);
                     db.SaveChanges();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.InnerException.Message);
                 }
+
+
+                }
+            }
+
+            public void DeleteBreakfastItem()
+            {
+                using (var db = new Model.DB_AGCanteenEntities())
+                {
+
+                    BreakfastPageViewModel bfViewModel = new BreakfastPageViewModel();
+
+                    try
+                    {
+                        var bfItem = (from bf in db.Tbl_Breakfast
+                                    where bf.Fld_BreakfastName == "test3"
+                                    select bf).SingleOrDefault();
+
+                        db.Tbl_Breakfast.Remove(bfItem);
+                        db.SaveChanges();
+
+                    }
+
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.InnerException.Message);
+                    }
 
 
                 }
