@@ -27,7 +27,6 @@ namespace AGCanteen.Model
     
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tbl_Breakfast> Tbl_Breakfast { get; set; }
-        public virtual DbSet<Tbl_BreakfastCategory> Tbl_BreakfastCategory { get; set; }
         public virtual DbSet<Tbl_Cake> Tbl_Cake { get; set; }
         public virtual DbSet<tbl_Customer> tbl_Customer { get; set; }
         public virtual DbSet<Tbl_Fruit> Tbl_Fruit { get; set; }

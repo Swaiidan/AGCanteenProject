@@ -23,9 +23,7 @@ namespace AGCanteen.Model
         public string Fld_BreakfastName { get; set; }
         public Nullable<decimal> Fld_BreakfastPrice { get; set; }
         public decimal Fld_BrealfastID { get; set; }
-        public Nullable<decimal> Fld_CategoryID { get; set; }
     
-        public virtual Tbl_BreakfastCategory Tbl_BreakfastCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_OrderLine> Tbl_OrderLine { get; set; }
     }

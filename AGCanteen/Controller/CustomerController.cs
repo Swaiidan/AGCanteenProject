@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AGCanteen.Controller
 {
+    /*
     class CustomerController
     {
         // Assignment in class - 5 different assignments one group pr. assignment- send the solution code to tha@easv.dk
@@ -82,11 +83,11 @@ namespace AGCanteen.Controller
 
                */
 
-                Console.Read();
+              //  Console.Read();
 
 
             }
 
-        }
-    }
-}
+     //   }
+  //  }
+//}
