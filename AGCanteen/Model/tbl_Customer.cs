@@ -18,6 +18,7 @@ namespace AGCanteen.Model
         public tbl_Customer()
         {
             this.Tbl_Order = new HashSet<Tbl_Order>();
+            this.Tbl_WeekOrder = new HashSet<Tbl_WeekOrder>();
         }
     
         public string Fld_CustomerName { get; set; }
@@ -26,5 +27,7 @@ namespace AGCanteen.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Order> Tbl_Order { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tbl_WeekOrder> Tbl_WeekOrder { get; set; }
     }
 }

@@ -18,8 +18,9 @@ namespace AGCanteen.ViewModel
 
         public ObservableCollection<BreakfastItem> ListOfBreakfastItems { get; set; } = new ObservableCollection<BreakfastItem>();
 
-
         public BreakfastItem SelectedBFItem { get; set; }
+
+
         public ICommand AddBFItem { get; set; }
         public ICommand DeleteBFItem { get; set; }
 
@@ -38,9 +39,9 @@ namespace AGCanteen.ViewModel
 
             //Adding Breakfeastitems TO BreakfastItemList
 
-            EmployeeController.CRUD breakfast = new EmployeeController.CRUD();
+            EmployeeController.CRUDBreakFastItems breakfast = new EmployeeController.CRUDBreakFastItems();
 
-                      List<BreakfastItem> BFItems = breakfast.AllBreakfastItems();
+            List<BreakfastItem> BFItems = breakfast.AllBreakfastItems();
 
                       foreach(var item in BFItems)
                     {
@@ -51,7 +52,7 @@ namespace AGCanteen.ViewModel
         }
         public void AddBreakfastItem(object p)
         {
-            EmployeeController.CRUD breakfast = new EmployeeController.CRUD();
+            EmployeeController.CRUDBreakFastItems breakfast = new EmployeeController.CRUDBreakFastItems();
 
             //adding a new BreakfastItem
             breakfast.AddBreakfastItem();
@@ -63,28 +64,23 @@ namespace AGCanteen.ViewModel
         public void DeleteBreakfastItem(object p)
         {
 
-            EmployeeController.CRUD breakfast = new EmployeeController.CRUD();
+            EmployeeController.CRUDBreakFastItems breakfast = new EmployeeController.CRUDBreakFastItems();
 
-
-            if(MessageBox.Show("Are you sure you want to delete this item?", "Messeage", MessageBoxButton.YesNo) == MessageBoxResult.Yes){
-            //delete bfitem from database
-            breakfast.DeleteBreakfastItem();
-
+            if(SelectedBFItem == null)
+            {
+                MessageBox.Show("Please Select an Item");
+            }
+            else
+            {
+                
+                if (MessageBox.Show("Are you sure you want to delete this item?", "Messeage", MessageBoxButton.YesNo) == MessageBoxResult.Yes) {
+                    //delete bfitem from database
+                    breakfast.DeleteBreakfastItem(); }
+            }
 
             //updates List with BreakfastItems
             this.LoadAllBreakfastItems();
-            }
-            
 
-        }
-
-        public string SelectedBFItemName()
-        {
-
-            String SelectedItem = SelectedBFItem.Name;
-           
-
-            return SelectedItem;
         }
 
 

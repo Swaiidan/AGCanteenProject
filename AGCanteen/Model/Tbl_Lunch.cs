@@ -18,6 +18,7 @@ namespace AGCanteen.Model
         public Tbl_Lunch()
         {
             this.Tbl_OrderLine = new HashSet<Tbl_OrderLine>();
+            this.Tbl_WeekOrder = new HashSet<Tbl_WeekOrder>();
         }
     
         public string Fld_LunchName { get; set; }
@@ -27,5 +28,7 @@ namespace AGCanteen.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_OrderLine> Tbl_OrderLine { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tbl_WeekOrder> Tbl_WeekOrder { get; set; }
     }
 }

@@ -25,7 +25,6 @@ namespace AGCanteen.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tbl_Breakfast> Tbl_Breakfast { get; set; }
         public virtual DbSet<Tbl_Cake> Tbl_Cake { get; set; }
         public virtual DbSet<tbl_Customer> tbl_Customer { get; set; }
@@ -33,5 +32,7 @@ namespace AGCanteen.Model
         public virtual DbSet<Tbl_Lunch> Tbl_Lunch { get; set; }
         public virtual DbSet<Tbl_Order> Tbl_Order { get; set; }
         public virtual DbSet<Tbl_OrderLine> Tbl_OrderLine { get; set; }
+        public virtual DbSet<Tbl_BreakfastCategory> Tbl_BreakfastCategory { get; set; }
+        public virtual DbSet<Tbl_WeekOrder> Tbl_WeekOrder { get; set; }
     }
 }

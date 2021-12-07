@@ -12,30 +12,34 @@ namespace AGCanteen.Controller
     public class EmployeeController
     {
         
-          
-        
-        public class CRUD  // abstract + subclassing better!
+        public class CRUDBreakFastItems
         {
             //READ all breakfastitems
-             
-             
+
             List<BreakfastItem> BreakfastItemList = new List<BreakfastItem>();
+
             public List<BreakfastItem> AllBreakfastItems()
             {
-                
 
+                
                 using (var db = new Model.DB_AGCanteenEntities())
                 {
 
-                    var query = from b in db.Tbl_Breakfast
-                                orderby b.Fld_BreakfastName
-                                select b;
 
-                    foreach(var item in db.Tbl_Breakfast)
+                    
+                    foreach (var item in db.Tbl_Breakfast)
                     {
                         BreakfastItem bfItem = new BreakfastItem();
                         bfItem.Name = item.Fld_BreakfastName;
                         bfItem.Price = (decimal)item.Fld_BreakfastPrice;
+
+                        //finding category
+                        var bfCat = (from cat in db.Tbl_BreakfastCategory
+                                      where cat.Fld_CategoryID == 1
+                                      select cat).SingleOrDefault();
+
+                        bfItem.Category = bfCat.Fld_CategoryName;
+
 
                         BreakfastItemList.Add(bfItem);
                     }
@@ -54,44 +58,49 @@ namespace AGCanteen.Controller
             {
                 using (var db = new Model.DB_AGCanteenEntities())
                 {
-                    
-                 try
-                {
-                    var breakfastItem = new BreakfastItem()
+
+                    try
                     {
-                        Name = "test3",
-                        Price = 100,
-                    };
+                        var breakfastItem = new BreakfastItem()
+                        {
+                            Name = "test2",
+                            Price = 100,
+                        };
                         Tbl_Breakfast bf = new Tbl_Breakfast();
                         bf.Fld_BreakfastName = breakfastItem.Name;
                         bf.Fld_BreakfastPrice = breakfastItem.Price;
                         db.Tbl_Breakfast.Add(bf);
-                    db.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.InnerException.Message);
-                }
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.InnerException.Message);
+                    }
 
 
                 }
             }
-
+            
+            
+            
             public void DeleteBreakfastItem()
             {
                 using (var db = new Model.DB_AGCanteenEntities())
                 {
 
-                    BreakfastPageViewModel bfViewModel = new BreakfastPageViewModel();
-
                     try
                     {
+                        
+                        
+
                         var bfItem = (from bf in db.Tbl_Breakfast
-                                    where bf.Fld_BreakfastName == "test3"
-                                    select bf).SingleOrDefault();
+                                      where bf.Fld_BrealfastID == 1
+                                      select bf).SingleOrDefault();
 
                         db.Tbl_Breakfast.Remove(bfItem);
                         db.SaveChanges();
+
+                        
 
                     }
 
@@ -104,14 +113,10 @@ namespace AGCanteen.Controller
                 }
             }
 
-            // # 3 UPDATE change email of a member
-
-            // # 4 DELETE a member by email
-
-            // # 5 INSERT a complete new member 
 
 
-            
+
 
         }
     }
+}

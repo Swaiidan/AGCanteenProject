@@ -11,6 +11,9 @@ namespace AGCanteen.Model
 
         public string Name { get; set; }
         public decimal Price { get; set; }
+        public int ID { get; set; }
+        public string Category { get; set; }
+        public int CategoryID { get; set; }
         
     }
 }
