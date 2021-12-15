@@ -68,7 +68,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\AddBreakfastItem.xaml">
+    <Page Include="View\AddBreakfastItemWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -89,18 +89,23 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\BreakfastItem.cs" />
+    <Compile Include="Model\Fruit.cs" />
     <Compile Include="Model\Tbl_BreakfastCategory.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Tbl_WeekOrder.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AddBreakfastItemViewModel.cs" />
     <Compile Include="ViewModel\BreakfastPageViewModel.cs" />
     <Compile Include="ViewModel\Commands\AddBreakfastItemCMD.cs" />
+    <Compile Include="ViewModel\Commands\AddButtonAddBreakfastWindowCMD.cs" />
+    <Compile Include="ViewModel\Commands\CancelBreakfastItemCMD.cs" />
     <Compile Include="ViewModel\Commands\DeleteBreakfastItemCMD.cs" />
+    <Compile Include="ViewModel\Commands\UpdateCMD.cs" />
     <Compile Include="ViewModel\LunchPageViewModel.cs" />
-    <Compile Include="View\AddBreakfastItem.xaml.cs">
-      <DependentUpon>AddBreakfastItem.xaml</DependentUpon>
+    <Compile Include="View\AddBreakfastItemWindow.xaml.cs">
+      <DependentUpon>AddBreakfastItemWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\BreakfastPage.xaml.cs">
       <DependentUpon>BreakfastPage.xaml</DependentUpon>

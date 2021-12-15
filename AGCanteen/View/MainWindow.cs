@@ -23,8 +23,7 @@ namespace AGCanteen.View
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        //BreakfastPageViewModel BreakfastPageViewModel = new BreakfastPageViewModel();
+  
 
         public MainWindow()
         {

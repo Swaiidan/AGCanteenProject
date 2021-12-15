@@ -9,56 +9,44 @@ using AGCanteen.Controller;
 using AGCanteen.ViewModel.Commands;
 using System.Windows.Input;
 using System.Windows;
+using AGCanteen.View;
 
 namespace AGCanteen.ViewModel
 {
     public class BreakfastPageViewModel : Bindable
     {
 
-
-        public ObservableCollection<BreakfastItem> ListOfBreakfastItems { get; set; } = new ObservableCollection<BreakfastItem>();
-
-        public BreakfastItem SelectedBFItem { get; set; }
-
-
         public ICommand AddBFItem { get; set; }
         public ICommand DeleteBFItem { get; set; }
+        public ICommand UpdateSelectedItem { get; set; }
+
+        public static BreakfastItem BFItem { get; set; }
+        public String BreakfastName { get; set; }
+        public Decimal BreakfastPrice { get; set; }
+
+        public BreakfastItem CurrentlySelectedName { get { return BreakfastItem.SelectedBFItem; } set { BreakfastItem.SelectedBFItem = value; OnPropertyChanged(); } }
+
 
         public BreakfastPageViewModel()
         {
             this.AddBFItem = new AddBreakfastItemCMD(AddBreakfastItem);
             this.DeleteBFItem = new DeleteBreakfastItemCMD(DeleteBreakfastItem);
-            this.LoadAllBreakfastItems();
+            this.UpdateSelectedItem = new UpdateCMD(UpdateItem);
+            BFItem = new BreakfastItem();
+            BFItem.LoadAllBreakfastItems();
 
         }
 
-        public void LoadAllBreakfastItems()
-        {
-            //clear BreakfastItemLIst
-            ListOfBreakfastItems.Clear();
 
-            //Adding Breakfeastitems TO BreakfastItemList
-
-            EmployeeController.CRUDBreakFastItems breakfast = new EmployeeController.CRUDBreakFastItems();
-
-            List<BreakfastItem> BFItems = breakfast.AllBreakfastItems();
-
-                      foreach(var item in BFItems)
-                    {
-                      ListOfBreakfastItems.Add(item);
-                }
-
-
-        }
         public void AddBreakfastItem(object p)
         {
-            EmployeeController.CRUDBreakFastItems breakfast = new EmployeeController.CRUDBreakFastItems();
+            
 
-            //adding a new BreakfastItem
-            breakfast.AddBreakfastItem();
+            AddBreakfastItemWindow AddBFWindow = new AddBreakfastItemWindow();
+            AddBFWindow.Show();
 
-            //updates List with BreakfastItems
-            this.LoadAllBreakfastItems();
+
+
         }
 
         public void DeleteBreakfastItem(object p)
@@ -66,7 +54,7 @@ namespace AGCanteen.ViewModel
 
             EmployeeController.CRUDBreakFastItems breakfast = new EmployeeController.CRUDBreakFastItems();
 
-            if(SelectedBFItem == null)
+            if(BreakfastItem.SelectedBFItem == null)
             {
                 MessageBox.Show("Please Select an Item");
             }
@@ -79,7 +67,36 @@ namespace AGCanteen.ViewModel
             }
 
             //updates List with BreakfastItems
-            this.LoadAllBreakfastItems();
+            UpdateListOfBreakfastItems();
+
+        }
+
+        public void UpdateListOfBreakfastItems()
+        {
+            BFItem.LoadAllBreakfastItems();
+        }
+
+        public void UpdateItem(object p)
+        {
+            EmployeeController.CRUDBreakFastItems breakfast = new EmployeeController.CRUDBreakFastItems();
+
+            
+            
+                BreakfastItem BreakfastItem = new BreakfastItem()
+                {
+                    ID = BreakfastItem.SelectedBFItem.ID,
+                    Name = BreakfastName,
+                    Price = BreakfastPrice
+                };
+
+                BreakfastItem.SelectedBFItem = BreakfastItem;
+
+            
+
+            breakfast.UpdateBreakfastItem();
+
+            UpdateListOfBreakfastItems();
+
 
         }
 

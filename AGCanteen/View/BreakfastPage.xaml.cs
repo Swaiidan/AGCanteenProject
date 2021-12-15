@@ -27,6 +27,7 @@ namespace AGCanteen.View
         public BreakfastPage()
         {
             InitializeComponent();
+            
 
             this.bfViewModel = new BreakfastPageViewModel();
             this.DataContext = this.bfViewModel;
