@@ -4,10 +4,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AGCanteen.Controller;
 
 namespace AGCanteen.Model
 {
-    class Fruit : Bindable
+    public class Fruit : Bindable
     {
         public static Fruit SelectedFruit { get; set; }
 
@@ -24,6 +25,17 @@ namespace AGCanteen.Model
         public int ID { get { return id; } set { id = value; this.OnPropertyChanged(); } }
         public void LoadFruitList()
         {
+            ListOfFruit = new ObservableCollection<Fruit>();
+
+            EmployeeController.CRUDFruit fruit = new EmployeeController.CRUDFruit();
+
+            List<Fruit> FruitList = fruit.AllFruits();
+
+            foreach (var item in FruitList)
+            {
+                ListOfFruit.Add(item);
+            }
+
 
         }
     }

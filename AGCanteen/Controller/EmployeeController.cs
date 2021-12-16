@@ -11,7 +11,7 @@ namespace AGCanteen.Controller
 {
     public class EmployeeController
     {
-        
+
         public class CRUDBreakFastItems
         {
 
@@ -22,12 +22,12 @@ namespace AGCanteen.Controller
             public List<BreakfastItem> AllBreakfastItems()
             {
 
-                
+
                 using (var db = new Model.DB_AGCanteenEntities())
                 {
 
 
-                    
+
                     foreach (var item in db.Tbl_Breakfast)
                     {
                         BreakfastItem bfItem = new BreakfastItem();
@@ -37,8 +37,8 @@ namespace AGCanteen.Controller
 
                         //finding category
                         var bfCat = (from cat in db.Tbl_BreakfastCategory
-                                      where cat.Fld_CategoryID == 1
-                                      select cat).SingleOrDefault();
+                                     where cat.Fld_CategoryID == 1
+                                     select cat).SingleOrDefault();
 
                         bfItem.Category = bfCat.Fld_CategoryName;
 
@@ -61,7 +61,7 @@ namespace AGCanteen.Controller
                 using (var db = new Model.DB_AGCanteenEntities())
                 {
 
-                    
+
 
                     try
                     {
@@ -87,8 +87,6 @@ namespace AGCanteen.Controller
                 }
             }
 
-
-            
             public void DeleteBreakfastItem()
             {
                 using (var db = new Model.DB_AGCanteenEntities())
@@ -98,7 +96,7 @@ namespace AGCanteen.Controller
 
                     try
                     {
-                        
+
 
                         var bfItem = (from bf in db.Tbl_Breakfast
                                       where bf.Fld_BrealfastID == BreakfastItem.SelectedBFItem.ID
@@ -107,7 +105,7 @@ namespace AGCanteen.Controller
                         db.Tbl_Breakfast.Remove(bfItem);
                         db.SaveChanges();
 
-                        
+
 
                     }
 
@@ -156,10 +154,128 @@ namespace AGCanteen.Controller
                 }
             }
 
+        }
 
+        public class CRUDFruit
+        {
+            List<Fruit> FruitList = new List<Fruit>();
+            public List<Fruit> AllFruits()
+            {
+
+
+                using (var db = new Model.DB_AGCanteenEntities())
+                {
+
+
+
+                    foreach (var fruit in db.Tbl_Fruit)
+                    {
+                        Fruit fr = new Fruit();
+                        fr.Name = fruit.Fld_FruitName;
+                        fr.Price = (decimal)fruit.Fld_FruitPrice;
+                        fr.ID = (int)fruit.Fld_FruitID;
+
+                        FruitList.Add(fr);
+                    }
+
+                }
+
+                return FruitList;
+            }
+
+            public void DeleteBreakfastItem()
+            {
+                using (var db = new Model.DB_AGCanteenEntities())
+                {
+
+
+
+                    try
+                    {
+
+
+                        var fruit = (from fr in db.Tbl_Fruit
+                                     where fr.Fld_FruitID == Fruit.SelectedFruit.ID
+                                     select fr).SingleOrDefault();
+
+                        db.Tbl_Fruit.Remove(fruit);
+                        db.SaveChanges();
+
+
+
+                    }
+
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.InnerException.Message);
+                    }
+                }
+            }
+
+            public void AddFruit()
+            {
+                using (var db = new Model.DB_AGCanteenEntities())
+                {
+                    try
+                    {
+                        var fr = new Fruit()
+                        {
+                            Name = Fruit.SelectedFruit.Name,
+                            Price = Fruit.SelectedFruit.Price,
+                            
+                        };
+                        Tbl_Fruit f = new Tbl_Fruit();
+                        f.Fld_FruitName = fr.Name;
+                        f.Fld_FruitPrice = fr.Price;
+                        db.Tbl_Fruit.Add(f);
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.InnerException.Message);
+                    }
+
+
+                }
+            }
+
+            public void UpdateFruit()
+            {
+                using (var db = new Model.DB_AGCanteenEntities())
+                {
+
+                    try
+                    {
+                        var fr = new Fruit()
+                        {
+                            ID = Fruit.SelectedFruit.ID,
+                            Name = Fruit.SelectedFruit.Name,
+                            Price = Fruit.SelectedFruit.Price,
+                        };
+
+                        var fruitItem = (from f in db.Tbl_Fruit
+                                      where f.Fld_FruitID == fr.ID
+                                      select f).SingleOrDefault();
+
+                        fruitItem.Fld_FruitName = fr.Name;
+                        fruitItem.Fld_FruitPrice = fr.Price;
+                        db.SaveChanges();
+
+
+                    }
+
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.InnerException.Message);
+                    }
+
+
+                }
+            }
 
 
 
         }
+
     }
 }

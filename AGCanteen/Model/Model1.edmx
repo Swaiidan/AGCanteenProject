@@ -44,7 +44,7 @@
           </Key>
           <Property Name="Fld_FruitName" Type="nchar" MaxLength="30" />
           <Property Name="Fld_FruitPrice" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="Fld_FruitID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Fld_FruitID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Tbl_Lunch">
           <Key>

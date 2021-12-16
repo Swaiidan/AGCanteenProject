@@ -19,8 +19,8 @@ namespace AGCanteen.ViewModel
         public ICommand CancelBFItem { get; set; }
         public Action CloseWindow { get; set; }
 
-        public String BreakfastItemName;
-        public Decimal BreakfastItemPrice;
+        public String BreakfastItemName { get; set; }
+        public Decimal BreakfastItemPrice { get; set; }
 
 
         public AddBreakfastItemViewModel()
