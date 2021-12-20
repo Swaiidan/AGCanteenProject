@@ -12,22 +12,21 @@ namespace AGCanteen.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_Customer
+    public partial class Tbl_Customer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_Customer()
+        public Tbl_Customer()
         {
             this.Tbl_Order = new HashSet<Tbl_Order>();
-            this.Tbl_WeekOrder = new HashSet<Tbl_WeekOrder>();
         }
     
+        public int Fld_CustomerID { get; set; }
         public string Fld_CustomerName { get; set; }
-        public decimal Fld_CustomerID { get; set; }
-        public Nullable<decimal> Fld_Phonenumber { get; set; }
+        public Nullable<int> Fld_CustomerPhoneNumber { get; set; }
+        public string Fld_CustomerEmail { get; set; }
+        public string Fld_CustomerPassword { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Order> Tbl_Order { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_WeekOrder> Tbl_WeekOrder { get; set; }
     }
 }

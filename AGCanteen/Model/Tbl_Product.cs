@@ -12,19 +12,23 @@ namespace AGCanteen.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_Fruit
+    public partial class Tbl_Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_Fruit()
+        public Tbl_Product()
         {
-            this.Tbl_OrderLine = new HashSet<Tbl_OrderLine>();
+            this.Tbl_OrderDetail = new HashSet<Tbl_OrderDetail>();
         }
     
-        public string Fld_FruitName { get; set; }
-        public Nullable<decimal> Fld_FruitPrice { get; set; }
-        public decimal Fld_FruitID { get; set; }
+        public int Fld_ProductID { get; set; }
+        public string Fld_ProductName { get; set; }
+        public Nullable<decimal> Fld_ProductPrice { get; set; }
+        public string Fld_ProductDescription { get; set; }
+        public Nullable<int> Fld_ProductCategoryID { get; set; }
+        public byte[] Fld_ProductImagePath { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_OrderLine> Tbl_OrderLine { get; set; }
+        public virtual ICollection<Tbl_OrderDetail> Tbl_OrderDetail { get; set; }
+        public virtual Tbl_ProductCategory Tbl_ProductCategory { get; set; }
     }
 }

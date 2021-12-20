@@ -13,10 +13,10 @@ namespace AGCanteen.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DB_AGCanteenEntities : DbContext
+    public partial class AGCanteenWebShopEntities : DbContext
     {
-        public DB_AGCanteenEntities()
-            : base("name=DB_AGCanteenEntities")
+        public AGCanteenWebShopEntities()
+            : base("name=AGCanteenWebShopEntities")
         {
         }
     
@@ -25,14 +25,12 @@ namespace AGCanteen.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Tbl_Breakfast> Tbl_Breakfast { get; set; }
-        public virtual DbSet<Tbl_Cake> Tbl_Cake { get; set; }
-        public virtual DbSet<tbl_Customer> tbl_Customer { get; set; }
-        public virtual DbSet<Tbl_Fruit> Tbl_Fruit { get; set; }
+        public virtual DbSet<Tbl_Customer> Tbl_Customer { get; set; }
         public virtual DbSet<Tbl_Lunch> Tbl_Lunch { get; set; }
+        public virtual DbSet<Tbl_LunchOrderDetail> Tbl_LunchOrderDetail { get; set; }
         public virtual DbSet<Tbl_Order> Tbl_Order { get; set; }
-        public virtual DbSet<Tbl_OrderLine> Tbl_OrderLine { get; set; }
-        public virtual DbSet<Tbl_BreakfastCategory> Tbl_BreakfastCategory { get; set; }
-        public virtual DbSet<Tbl_WeekOrder> Tbl_WeekOrder { get; set; }
+        public virtual DbSet<Tbl_OrderDetail> Tbl_OrderDetail { get; set; }
+        public virtual DbSet<Tbl_Product> Tbl_Product { get; set; }
+        public virtual DbSet<Tbl_ProductCategory> Tbl_ProductCategory { get; set; }
     }
 }

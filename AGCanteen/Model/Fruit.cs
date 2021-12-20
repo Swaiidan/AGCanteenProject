@@ -23,6 +23,8 @@ namespace AGCanteen.Model
         public decimal Price { get; set; }
         private int id;
         public int ID { get { return id; } set { id = value; this.OnPropertyChanged(); } }
+
+        public int CategoryID { get; set; }
         public void LoadFruitList()
         {
             ListOfFruit = new ObservableCollection<Fruit>();

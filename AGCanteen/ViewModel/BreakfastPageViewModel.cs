@@ -30,7 +30,6 @@ namespace AGCanteen.ViewModel
         public BreakfastItem CurrentlySelectedName { get { return BreakfastItem.SelectedBFItem; } 
             set { BreakfastItem.SelectedBFItem = value; OnPropertyChanged(); } }
 
-        private int SelectedItemCounter = 0;
 
         public BreakfastPageViewModel()
         {
@@ -91,7 +90,7 @@ namespace AGCanteen.ViewModel
         {
             EmployeeController.CRUDBreakFastItems breakfast = new EmployeeController.CRUDBreakFastItems();
 
-            
+                //only works with breakfastitem, not fruit
             
                 BreakfastItem BreakfastItem = new BreakfastItem()
                 {

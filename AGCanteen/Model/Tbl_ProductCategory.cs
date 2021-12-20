@@ -12,20 +12,18 @@ namespace AGCanteen.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_Cake
+    public partial class Tbl_ProductCategory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_Cake()
+        public Tbl_ProductCategory()
         {
-            this.Tbl_OrderLine = new HashSet<Tbl_OrderLine>();
+            this.Tbl_Product = new HashSet<Tbl_Product>();
         }
     
-        public string Fld_CakeName { get; set; }
-        public Nullable<decimal> Fld_CakePrice { get; set; }
-        public string Fld_Description { get; set; }
-        public decimal Fld_CakeID { get; set; }
+        public int Fld_ProductCategoryID { get; set; }
+        public string Fld_ProductCategoryName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_OrderLine> Tbl_OrderLine { get; set; }
+        public virtual ICollection<Tbl_Product> Tbl_Product { get; set; }
     }
 }
